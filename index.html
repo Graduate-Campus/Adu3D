@@ -52,18 +52,18 @@
         color: #6a6c6c;
       }
       .header a {
-        color: #faa424;
+        color: #bea602;
         text-decoration: none;
         cursor: pointer;
       }
       #info {
-        background: rgb(0, 0, 0);
+        background: #3b3b3b;
         position: absolute;
         left: 10px;
 
         top: 10px;
         border-radius: 10px;
-        color: #faa424;
+        color: #bea602;
         text-align: center;
         padding: 1.5em;
         font-family: Poppins;
@@ -164,9 +164,11 @@
 
         pointLight = new THREE.PointLight(0xffffff, 1, 5000);
         pointLight.position.set(1000, 500, 100);
+
         scene.add(pointLight);
 
         sunLight = new THREE.DirectionalLight(0xffffff, 3);
+        sunLight.castShadow = true;
         sunLight.position.set(1000, 2000, -4000);
 
         sunLight.castShadow = true;
@@ -212,6 +214,7 @@
           function (gltf) {
             car = gltf.scene.children[0];
             car.scale.set(0.5, 0.5, 0.5);
+
             let powersup = car.children[0];
             let usbport = car.children[3];
 
