@@ -149,8 +149,8 @@
           shadowBias: 0,
         };
       var raycaster = new THREE.Raycaster();
-      var mouse = new THREE.Vector3(),
-        INTERSECTED;
+      var mouse = new THREE.Vector3();
+      var INTERSECTEDHOVER = null;
       let box;
 
       function init() {
@@ -230,16 +230,27 @@
           function (gltf) {
             car = gltf.scene.children[0];
             car.scale.set(0.5, 0.5, 0.5);
-
+            //console.log(car);
+            //travers all material for
+            gltf.scene.traverse(function (child) {
+              if (child.material) child.material = child.material.clone();
+            });
             let powersup = car.children[0];
             let usbport = car.children[3];
 
             box = new THREE.Box3().setFromObject(car);
             const center = box.getCenter(new THREE.Vector3());
             //update the picking ray with the camera and mouse position
-            console.log(car.children[3]);
-            console.log(car);
+            //console.log(car.children[3]);
+            //console.log(car);
             loading.style.display = "none";
+            for (let index = 0; index < car.children.length; index++) {
+              car.children[index].material.name = index;
+
+              car.children[index].material.uuid = Math.random()
+                .toString(36)
+                .substr(2, 9);
+            }
             //car.children[3].material.color.setHex(0xfff);
             gltf.scene.position.x += gltf.scene.position.x - center.x;
             gltf.scene.position.y += gltf.scene.position.y - center.y;
@@ -266,11 +277,11 @@
         // calculate objects intersecting the picking ray
         //https://stackoverflow.com/questions/59631627/gltf-model-and-interaction-in-three-js
         var intersects = raycaster.intersectObjects(car.children, true);
-        if (intersects == null) {
+        if (intersects < 0) {
           textbox("Bewegen Sie die Maus über ein Element, um mehr zu erfahren");
         }
         for (var i = 0; i < intersects.length; i++) {
-          //intersects[i].object.material.color.set(0xfffff);
+          //intersects[i].object.material.color.set(0xfffffff);
 
           if (intersects[i] == null) {
             textbox(
@@ -282,7 +293,82 @@
               intersects[i].object.name !== "Board_Edges" &&
               intersects[i].object.name !== "Board_Bottom"
             ) {
-              textbox(intersects[i].object.name);
+              if (
+                intersects[i].object.name == "reset_switch" ||
+                intersects[i].object.name == "USB_port" ||
+                intersects[i].object.name == "USB_port_plastic" ||
+                intersects[i].object.name == "GRND__AREF__12C_comm" ||
+                intersects[i].object.name == "Digital_I_O_ports" ||
+                intersects[i].object.name ==
+                  "MCU_Programming_connector__ICSP__pins" ||
+                intersects[i].object.name == "Analog_I_O_pins" ||
+                intersects[i].object.name == "Digital_I_O_ports" ||
+                intersects[i].object.name == "power_supply" ||
+                intersects[i].object.name == "IC_USB_controller" ||
+                intersects[i].object.name == "Power___AUX_I_O"
+              ) {
+                textbox(intersects[i].object.name);
+
+                if (intersects)
+                  if (intersects.length > 0) {
+                    // if the closest object intersected is not the currently stored intersection object
+                    if (intersects[i].object != INTERSECTEDHOVER) {
+                      if (INTERSECTEDHOVER)
+                        INTERSECTEDHOVER.material.color.setHex(
+                          INTERSECTEDHOVER.currentHex
+                        );
+                      // store reference to closest object as current intersection object
+                      INTERSECTEDHOVER = intersects[0].object;
+                      // store color of closest object (for later restoration)
+                      INTERSECTEDHOVER.currentHex = INTERSECTEDHOVER.material.color.getHex();
+                      // set a new color for closest object
+                      INTERSECTEDHOVER.material.color.setHex(0x61d0ff);
+                    } // there are no intersections
+                  } // there are no intersections
+                  else {
+                    // restore previous intersection object (if it exists) to its original color
+                    if (INTERSECTEDHOVER)
+                      INTERSECTEDHOVER.material.color.setHex(
+                        INTERSECTEDHOVER.currentHex
+                      );
+                    // remove previous intersection object reference
+                    //     by setting current intersection object to "nothing"
+                    INTERSECTEDHOVER = null;
+                  }
+              } else if (
+                intersects[i].object.name == "ATmega328_Microcontroller" ||
+                intersects[i].object.name == "Microcontroller_holder_black" ||
+                intersects[i].object.name == "Microcontroller_holder_metal" ||
+                intersects[i].object.name == "ATmega328_Microcontroller_pins"
+              ) {
+                textbox("ATmega328_Microcontroller");
+                if (intersects)
+                  if (intersects.length > 0) {
+                    // if the closest object intersected is not the currently stored intersection object
+                    if (intersects[i].object != INTERSECTEDHOVER) {
+                      if (INTERSECTEDHOVER)
+                        INTERSECTEDHOVER.material.color.setHex(
+                          INTERSECTEDHOVER.currentHex
+                        );
+                      // store reference to closest object as current intersection object
+                      INTERSECTEDHOVER = intersects[0].object;
+                      // store color of closest object (for later restoration)
+                      INTERSECTEDHOVER.currentHex = INTERSECTEDHOVER.material.color.getHex();
+                      // set a new color for closest object
+                      INTERSECTEDHOVER.material.color.setHex(0x61d0ff);
+                    } // there are no intersections
+                  } // there are no intersections
+                  else {
+                    // restore previous intersection object (if it exists) to its original color
+                    if (INTERSECTEDHOVER)
+                      INTERSECTEDHOVER.material.color.setHex(
+                        INTERSECTEDHOVER.currentHex
+                      );
+                    // remove previous intersection object reference
+                    //     by setting current intersection object to "nothing"
+                    INTERSECTEDHOVER = null;
+                  }
+              }
             }
           }
         }
