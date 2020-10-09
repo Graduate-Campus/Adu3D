@@ -132,6 +132,7 @@
       let button = document.createElement("button");
       let infoElem = document.querySelector("#info");
       let loading = document.querySelector("#loading");
+      let infoboxtext = document.getElementById("txinfo");
       let renderer,
         scene,
         camera,
@@ -295,10 +296,10 @@
             ) {
               if (
                 intersects[i].object.name == "reset_switch" ||
-                intersects[i].object.name == "USB_port" ||
-                intersects[i].object.name == "USB_port_plastic" ||
                 intersects[i].object.name == "GRND__AREF__12C_comm" ||
                 intersects[i].object.name == "Digital_I_O_ports" ||
+                intersects[i].object.name == "USB_port" ||
+                intersects[i].object.name == "USB_port_plastic" ||
                 intersects[i].object.name ==
                   "MCU_Programming_connector__ICSP__pins" ||
                 intersects[i].object.name == "Analog_I_O_pins" ||
@@ -307,7 +308,76 @@
                 intersects[i].object.name == "IC_USB_controller" ||
                 intersects[i].object.name == "Power___AUX_I_O"
               ) {
-                textbox(intersects[i].object.name);
+                if (
+                  intersects[i].object.name == "USB_port" ||
+                  intersects[i].object.name == "USB_port_plastic"
+                ) {
+                  textbox("USB-Anschluss");
+                  infobox(
+                    "USB-Anschluss: Stromversorgung," +
+                      "\n" +
+                      "Upload von Programme, \n Serielle Datenuebertragung"
+                  );
+                } else {
+                  if (intersects[i].object.name == "power_supply") {
+                    textbox("Hohlbuchse");
+                    infobox("Hohlbuchse: Externe Stromversorgung");
+                  } else {
+                    if (intersects[i].object.name == "Power___AUX_I_O") {
+                      textbox("Stromversorgung");
+                      infobox("Stromversorgung: 5V, 3.3V und GND-Anschluss");
+                    } else {
+                      if (intersects[i].object.name == "Analog_I_O_pins") {
+                        textbox("Analog-Pins");
+                        infobox(
+                          "Analog-Pins: Signal-Eingänge für analoge Sensoren"
+                        );
+                      } else {
+                        if (intersects[i].object.name == "Power___AUX_I_O") {
+                          textbox("Power-AUX-I/O");
+                        } else {
+                          if (
+                            intersects[i].object.name ==
+                            "MCU_Programming_connector__ICSP__pins"
+                          ) {
+                            textbox("ICSP-Header");
+                            infobox(
+                              "ICSP-Header: Programmierung neuer Mikrocontroller"
+                            );
+                          } else {
+                            if (
+                              intersects[i].object.name == "Digital_I_O_ports"
+                            ) {
+                              textbox("Digital-Pins");
+                              infobox(
+                                "Digital-Pins: Signal-Eingänge für digitale Sensoren"
+                              );
+                            } else {
+                              if (
+                                intersects[i].object.name ==
+                                "GRND__AREF__12C_comm"
+                              ) {
+                                textbox("I2C-Pins");
+                                infobox("I2C-Pins: Serielle Datenausgabe");
+                              } else {
+                                if (
+                                  intersects[i].object.name == "reset_switch"
+                                ) {
+                                  textbox("Reset-Button");
+                                  infobox(
+                                    "Reset-Button: Neustart des Arduinos"
+                                  );
+                                } else {
+                                  textbox(intersects[i].object.name);
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
 
                 if (intersects)
                   if (intersects.length > 0) {
@@ -341,7 +411,10 @@
                 intersects[i].object.name == "Microcontroller_holder_metal" ||
                 intersects[i].object.name == "ATmega328_Microcontroller_pins"
               ) {
-                textbox("ATmega328_Microcontroller");
+                textbox("ATmega328-Microcontroller");
+                infobox(
+                  "ATmega328-Microcontroller: Recheneinheit,\n Arbeitspeicher,\n Speicher für Quellcode"
+                );
                 if (intersects)
                   if (intersects.length > 0) {
                     // if the closest object intersected is not the currently stored intersection object
@@ -389,6 +462,10 @@
       function textbox(name) {
         infoElem.textContent = "Das ist: " + name;
         //console.log(name);
+      }
+      function infobox(info) {
+        console.log(info);
+        infoboxtext.textContent = info;
       }
       function show() {
         console.log(mouse.x + ", " + mouse.y);
