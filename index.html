@@ -308,6 +308,12 @@
                 intersects[i].object.name == "IC_USB_controller" ||
                 intersects[i].object.name == "Power___AUX_I_O"
               ) {
+                if (intersects[i].object.name == "IC_USB_controller") {
+                  textbox("USB-Controller");
+                  infobox(
+                    "USB-Controller: ergänzt den Mikrocontroller um eine USB-Schnittstelle"
+                  );
+                }
                 if (
                   intersects[i].object.name == "USB_port" ||
                   intersects[i].object.name == "USB_port_plastic"
@@ -316,7 +322,7 @@
                   infobox(
                     "USB-Anschluss: Stromversorgung," +
                       "\n" +
-                      "Upload von Programme, \n Serielle Datenuebertragung"
+                      "Upload von Programmen, \n serielle Datenuebertragung"
                   );
                 } else {
                   if (intersects[i].object.name == "power_supply") {
@@ -330,7 +336,7 @@
                       if (intersects[i].object.name == "Analog_I_O_pins") {
                         textbox("Analog-Pins");
                         infobox(
-                          "Analog-Pins: Signal-Eingänge für analoge Sensoren"
+                          "Analog-Pins: Signal-Eingänge für analoge Sensoren, auch als digitale Ein-Ausgänge nutzbar"
                         );
                       } else {
                         if (intersects[i].object.name == "Power___AUX_I_O") {
@@ -350,15 +356,15 @@
                             ) {
                               textbox("Digital-Pins");
                               infobox(
-                                "Digital-Pins: Signal-Eingänge für digitale Sensoren"
+                                "Digital-Pins: Signal-Ein- und Ausgänge für digitale Sensoren und Aktoren"
                               );
                             } else {
                               if (
                                 intersects[i].object.name ==
                                 "GRND__AREF__12C_comm"
                               ) {
-                                textbox("I2C-Pins");
-                                infobox("I2C-Pins: Serielle Datenausgabe");
+                                textbox("I²C-Pins");
+                                infobox("I²C-Pins: Serielle Datenausgabe");
                               } else {
                                 if (
                                   intersects[i].object.name == "reset_switch"
@@ -413,7 +419,7 @@
               ) {
                 textbox("ATmega328-Microcontroller");
                 infobox(
-                  "ATmega328-Microcontroller: Recheneinheit,\n Arbeitspeicher,\n Speicher für Quellcode"
+                  "ATmega328-Microcontroller: enthält außer der CPU u.a. auch Arbeitsspeicher und Speicher für ausführbare Programme"
                 );
                 if (intersects)
                   if (intersects.length > 0) {
