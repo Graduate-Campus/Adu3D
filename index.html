@@ -313,68 +313,69 @@
                   infobox(
                     "USB-Controller: ergänzt den Mikrocontroller um eine USB-Schnittstelle"
                   );
-                }
-                if (
-                  intersects[i].object.name == "USB_port" ||
-                  intersects[i].object.name == "USB_port_plastic"
-                ) {
-                  textbox("USB-Anschluss");
-                  infobox(
-                    "USB-Anschluss: Stromversorgung," +
-                      "\n" +
-                      "Upload von Programmen, \n serielle Datenuebertragung"
-                  );
                 } else {
-                  if (intersects[i].object.name == "power_supply") {
-                    textbox("Hohlbuchse");
-                    infobox("Hohlbuchse: Externe Stromversorgung");
+                  if (
+                    intersects[i].object.name == "USB_port" ||
+                    intersects[i].object.name == "USB_port_plastic"
+                  ) {
+                    textbox("USB-Anschluss");
+                    infobox(
+                      "USB-Anschluss: Stromversorgung," +
+                        "\n" +
+                        "Upload von Programmen, \n serielle Datenuebertragung"
+                    );
                   } else {
-                    if (intersects[i].object.name == "Power___AUX_I_O") {
-                      textbox("Stromversorgung");
-                      infobox("Stromversorgung: 5V, 3.3V und GND-Anschluss");
+                    if (intersects[i].object.name == "power_supply") {
+                      textbox("Hohlbuchse");
+                      infobox("Hohlbuchse: Externe Stromversorgung");
                     } else {
-                      if (intersects[i].object.name == "Analog_I_O_pins") {
-                        textbox("Analog-Pins");
-                        infobox(
-                          "Analog-Pins: Signal-Eingänge für analoge Sensoren, auch als digitale Ein-Ausgänge nutzbar"
-                        );
+                      if (intersects[i].object.name == "Power___AUX_I_O") {
+                        textbox("Stromversorgung");
+                        infobox("Stromversorgung: 5V, 3.3V und GND-Anschluss");
                       } else {
-                        if (intersects[i].object.name == "Power___AUX_I_O") {
-                          textbox("Power-AUX-I/O");
+                        if (intersects[i].object.name == "Analog_I_O_pins") {
+                          textbox("Analog-Pins");
+                          infobox(
+                            "Analog-Pins: Signal-Eingänge für analoge Sensoren, auch als digitale Ein-Ausgänge nutzbar"
+                          );
                         } else {
-                          if (
-                            intersects[i].object.name ==
-                            "MCU_Programming_connector__ICSP__pins"
-                          ) {
-                            textbox("ICSP-Header");
-                            infobox(
-                              "ICSP-Header: Programmierung neuer Mikrocontroller"
-                            );
+                          if (intersects[i].object.name == "Power___AUX_I_O") {
+                            textbox("Power-AUX-I/O");
                           } else {
                             if (
-                              intersects[i].object.name == "Digital_I_O_ports"
+                              intersects[i].object.name ==
+                              "MCU_Programming_connector__ICSP__pins"
                             ) {
-                              textbox("Digital-Pins");
+                              textbox("ICSP-Header");
                               infobox(
-                                "Digital-Pins: Signal-Ein- und Ausgänge für digitale Sensoren und Aktoren"
+                                "ICSP-Header: Programmierung neuer Mikrocontroller"
                               );
                             } else {
                               if (
-                                intersects[i].object.name ==
-                                "GRND__AREF__12C_comm"
+                                intersects[i].object.name == "Digital_I_O_ports"
                               ) {
-                                textbox("I²C-Pins");
-                                infobox("I²C-Pins: Serielle Datenausgabe");
+                                textbox("Digital-Pins");
+                                infobox(
+                                  "Digital-Pins: Signal-Ein- und Ausgänge für digitale Sensoren und Aktoren"
+                                );
                               } else {
                                 if (
-                                  intersects[i].object.name == "reset_switch"
+                                  intersects[i].object.name ==
+                                  "GRND__AREF__12C_comm"
                                 ) {
-                                  textbox("Reset-Button");
-                                  infobox(
-                                    "Reset-Button: Neustart des Arduinos"
-                                  );
+                                  textbox("I²C-Pins");
+                                  infobox("I²C-Pins: Serielle Datenausgabe");
                                 } else {
-                                  textbox(intersects[i].object.name);
+                                  if (
+                                    intersects[i].object.name == "reset_switch"
+                                  ) {
+                                    textbox("Reset-Button");
+                                    infobox(
+                                      "Reset-Button: Neustart des Arduinos"
+                                    );
+                                  } else {
+                                    textbox(intersects[i].object.name);
+                                  }
                                 }
                               }
                             }
