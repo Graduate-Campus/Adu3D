@@ -18,15 +18,11 @@
       </h1>
     </div>
     <div id="infobuttom">
-      <p id="txinfo">
-        Bewegen Sie die Maus über ein Element, um mehr zu erfahren
-      </p>
+      <p id="txinfo">Hover over an item to learn more</p>
       <button class="btinfo" id="btinfo">X</button>
     </div>
     <div id="info">
-      <p class="infotext">
-        Bewegen Sie die Maus über ein Element, um mehr zu erfahren
-      </p>
+      <p class="infotext">Hover over an item to learn more</p>
     </div>
     <div id="loading">
       <img src="loading.gif" alt="loading" width="100px" height="100px" />
@@ -279,15 +275,13 @@
         //https://stackoverflow.com/questions/59631627/gltf-model-and-interaction-in-three-js
         var intersects = raycaster.intersectObjects(car.children, true);
         if (intersects < 0) {
-          textbox("Bewegen Sie die Maus über ein Element, um mehr zu erfahren");
+          textbox("Hover over an item to learn more");
         }
         for (var i = 0; i < intersects.length; i++) {
           //intersects[i].object.material.color.set(0xfffffff);
 
           if (intersects[i] == null) {
-            textbox(
-              "Bewegen Sie die Maus über ein Element, um mehr zu erfahren"
-            );
+            textbox("Hover over an item to learn more");
           } else {
             if (
               intersects[i].object.name !== "Board_Top" &&
@@ -311,32 +305,32 @@
                 if (intersects[i].object.name == "IC_USB_controller") {
                   textbox("USB-Controller");
                   infobox(
-                    "USB-Controller: ergänzt den Mikrocontroller um eine USB-Schnittstelle"
+                    "USB-Controller: adds a USB interface to the microcontroller"
                   );
                 } else {
                   if (
                     intersects[i].object.name == "USB_port" ||
                     intersects[i].object.name == "USB_port_plastic"
                   ) {
-                    textbox("USB-Anschluss");
+                    textbox("USB port");
                     infobox(
-                      "USB-Anschluss: Stromversorgung," +
+                      "USB port: power supply," +
                         "\n" +
-                        "Upload von Programmen, \n serielle Datenuebertragung"
+                        "Upload programs, \n serial data transmission"
                     );
                   } else {
                     if (intersects[i].object.name == "power_supply") {
-                      textbox("Hohlbuchse");
-                      infobox("Hohlbuchse: Externe Stromversorgung");
+                      textbox("Hollow socket");
+                      infobox("Hollow socket: External power supply");
                     } else {
                       if (intersects[i].object.name == "Power___AUX_I_O") {
-                        textbox("Stromversorgung");
-                        infobox("Stromversorgung: 5V, 3.3V und GND-Anschluss");
+                        textbox("Power supply");
+                        infobox("Power supply: 5V, 3.3V and GND connection");
                       } else {
                         if (intersects[i].object.name == "Analog_I_O_pins") {
                           textbox("Analog-Pins");
                           infobox(
-                            "Analog-Pins: Signal-Eingänge für analoge Sensoren, auch als digitale Ein-Ausgänge nutzbar"
+                            "Analog pins: Signal inputs for analog sensors, can also be used as digital inputs/outputs"
                           );
                         } else {
                           if (intersects[i].object.name == "Power___AUX_I_O") {
@@ -348,7 +342,7 @@
                             ) {
                               textbox("ICSP-Header");
                               infobox(
-                                "ICSP-Header: Programmierung neuer Mikrocontroller"
+                                "ICSP header: Programming new microcontrollers"
                               );
                             } else {
                               if (
@@ -356,7 +350,7 @@
                               ) {
                                 textbox("Digital-Pins");
                                 infobox(
-                                  "Digital-Pins: Signal-Ein- und Ausgänge für digitale Sensoren und Aktoren"
+                                  "Digital-Pins: Signal inputs and outputs for digital sensors and actuators"
                                 );
                               } else {
                                 if (
@@ -364,14 +358,14 @@
                                   "GRND__AREF__12C_comm"
                                 ) {
                                   textbox("I²C-Pins");
-                                  infobox("I²C-Pins: Serielle Datenausgabe");
+                                  infobox("I²C-Pins: Serial data output");
                                 } else {
                                   if (
                                     intersects[i].object.name == "reset_switch"
                                   ) {
                                     textbox("Reset-Button");
                                     infobox(
-                                      "Reset-Button: Neustart des Arduinos"
+                                      "Reset-Button: Restart the Arduino"
                                     );
                                   } else {
                                     textbox(intersects[i].object.name);
@@ -418,9 +412,9 @@
                 intersects[i].object.name == "Microcontroller_holder_metal" ||
                 intersects[i].object.name == "ATmega328_Microcontroller_pins"
               ) {
-                textbox("ATmega328-Mikrocontroller");
+                textbox("ATmega328 microcontroller");
                 infobox(
-                  "ATmega328-Mikrocontroller: enthält außer der CPU u.a. auch Arbeitsspeicher und Speicher für ausführbare Programme"
+                  "ATmega328 microcontroller: In addition to the CPU, it also contains main memory and memory for executable programs"
                 );
                 if (intersects)
                   if (intersects.length > 0) {
@@ -467,7 +461,7 @@
         renderer.setSize(window.innerWidth, window.innerHeight);
       }
       function textbox(name) {
-        infoElem.textContent = "Das ist: " + name;
+        infoElem.textContent = "That is: " + name;
         //console.log(name);
       }
       function infobox(info) {
